@@ -1,24 +1,93 @@
-html, body { height: 100%; margin: 0; }
-
+/* Page background: 4 layers, listed from front to back */
 body {
-  font-family: Tahoma, sans-serif;
-  background: url(bg.svg), #1a0b1f;
-  display: grid;
-  place-items: center;
+  min-height: 100vh;
+  font-family: "Vazirmatn", Tahoma, sans-serif;
+  background-color: #140a2e;
+  background-image:
+    url(fruits.svg),                                    /* pomegranates and dates */
+    url(moon.svg),                                      /* the moon */
+    url(stars.svg),                                     /* the stars */
+    linear-gradient(#0b0a2a, #2a0f3a 60%, #5a1230);     /* the night sky */
+  background-repeat: no-repeat, no-repeat, repeat, no-repeat;
+  background-position: bottom center, top 24px left 24px, top left, center;
+  background-size: min(92vw, 420px), 90px, 300px, cover;
+  background-attachment: fixed;
+}
+
+/* The envelope (this is its inside / back) */
+.envelope {
+  position: relative;
+  max-width: 320px;
+  aspect-ratio: 3 / 2;
+  margin: 130px auto 0;   /* empty space above, for the letter to rise into */
+  background: #8e0b22;
+  border-radius: 8px;
+  cursor: pointer;
+  filter: drop-shadow(0 16px 24px rgba(0, 0, 0, 0.5));
+}
+
+/* The letter with the message, hidden inside the envelope */
+.letter {
+  position: absolute;
+  left: 5%;
+  right: 5%;
+  bottom: 5%;
+  height: 85%;
   padding: 16px;
-  box-sizing: border-box;
-}
-
-.card {
-  max-width: 420px;
-  padding: 32px 24px;
-  text-align: center;
-  line-height: 2;
-  color: #3a1420;
   background: #fbf1e3;
-  border-radius: 16px;
+  color: #3a1420;
+  border: 2px solid #c9a15a;
+  border-radius: 6px;
+  z-index: 2;
+  transition: transform 0.5s;
 }
 
-h1 { margin: 0 0 8px; color: #c8102e; }
+.letter h1 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #c8102e;
+}
 
-p { margin: 0; }
+/* The front of the envelope, with a V-shaped cut at the top */
+.pocket {
+  position: absolute;
+  inset: 0;
+  background: #c8102e;
+  border-radius: 8px;
+  clip-path: polygon(0 0, 50% 45%, 100% 0, 100% 100%, 0 100%);
+  z-index: 3;
+}
+
+/* The flap: a triangle that covers the top */
+.flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 55%;
+  background: #a50d26;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  transform-origin: top;
+  z-index: 4;
+  /* closing: wait 0.5s for the letter to go down, then close */
+  transition: transform 0.5s 0.5s, z-index 0s 0.5s;
+}
+
+/* ---- Open state: JavaScript adds the "open" class ---- */
+
+/* 1) the flap turns up and goes behind the letter */
+.envelope.open .flap {
+  transform: rotateX(180deg);
+  z-index: 1;
+  transition: transform 0.5s, z-index 0s 0.5s;
+}
+
+/* 2) then the letter slides up */
+.envelope.open .letter {
+  transform: translateY(-60%);
+  transition: transform 0.5s 0.5s;
+}
+
+.letter p {
+  margin: 0;
+}

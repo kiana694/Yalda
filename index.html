@@ -4,13 +4,37 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>یلدا مبارک</title>
+
+  <!-- Persian font -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;800&display=swap">
+  <!-- Bootstrap (RTL version, for Persian) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css">
+  <!-- Our own styles -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <main class="card">
-    <h1>یلدا مبارک</h1>
-    <p>شب یلدایتان پر از انار و خرما، گرمای دورهمی و لبخند.</p>
-    <p> بلند ترین شب سال</p>
-  </main>
+
+  <div class="container">
+    <div class="row min-vh-100 justify-content-center align-items-center">
+      <div class="col-12 col-sm-8 col-md-6 col-lg-4 text-center">
+
+        <!-- The envelope has 3 parts: letter, pocket, flap -->
+        <div class="envelope" id="envelope">
+          <div class="letter">
+            <h1>یلدا مبارک</h1>
+            <p>شب یلدایتان پر از انار و خرما و لبخند.</p>
+            <p> بلند ترین شب سال</p>
+          </div>
+          <div class="pocket"></div>
+          <div class="flap"></div>
+        </div>
+
+        <button class="btn btn-warning rounded-pill px-4 mt-4" id="toggle">باز کردن پاکت</button>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="card.js"></script>
 </body>
 </html>
